@@ -1,7 +1,13 @@
 const mysql = require('../config/mysql.js')();
 
 module.exports = function (app) {
-
+    app.get('/admin', (req, res) => {
+        res.render('admin/adminIndex', {
+            'title': 'admin',
+            'db': 'Index',
+        });
+    });
+    
     app.get('/admin/weapons', (req, res, next) => {
         mysql.query(`SELECT weapons.id AS id, weapons.name AS name, damage, aux_effect, damage_reduction, critical, 
                     durability, weapons.range AS bow_range, stability, weight,
