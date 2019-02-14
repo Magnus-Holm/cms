@@ -1,0 +1,63 @@
+<% include admin-partials/admin_head.ejs %>
+<% include admin-partials/headerAdmin.ejs %>
+<main role="main">
+	<% include admin-partials/navAdmin.ejs %>
+	<section>
+		<form class="deleteForm">
+			<input type="hidden" name="id" value="<%= results.id %>">
+			<p>Er du sikker på at du vil slette det her hold:</p>
+			<table>
+				<tr>
+					<th>ID</th>
+					<th>Navn</th>
+					<th>Alder</th>
+					<th>Niveau</th>
+					<th>Stil ID</th>
+					<th>Instruktør</th>
+					<th>Pris</th>
+				</tr>
+				<tr>
+					<td>
+						<%= results.id %>
+					</td>
+					<td>
+						<%= results.name %>
+					</td>
+					<td>
+						<%= results.age_id %>
+					</td>
+					<td>
+						<%= results.level_id %>
+					</td>
+					<td>
+						<%= results.style_id %>
+					</td>
+					<td>
+						<%= results.instructor_id %>
+					</td>
+					<td>
+						<%= results.price %>
+					</td>
+				</tr>
+			</table>
+			<button type="submit">Slet</button>
+		</form>
+	</section>
+</main>
+<script>
+	const form = document.querySelector('.deleteForm');
+	form.addEventListener('submit', function (event) {
+		event.preventDefault();
+		fetch(`http://localhost:3000/admin/klasser/delete/${this.id.value}`, {
+				method: 'DELETE'
+			})
+			.then(response => {
+				if (response.status === 200) {
+					window.location.href = '/admin/klasser';
+				}
+			});
+	});
+</script>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<% include admin-partials/admin_head.ejs %>
+<% include admin-partials/headerAdmin.ejs %>
+<main role="main">
+	<% include admin-partials/navAdmin.ejs %>
+	<section>
+		<form class="patchForm">
+			<input type="hidden" name="id" value="<%= result.id %>">
+
+			<label for="name">Item Navn</label>
+			<input type="text" id="name" name="name" value="<%= result.name %>">
+
+			<label for="picture">Picture</label>
+			<input type="file" id="picture" name="picture">
+
+			<img class="itemImg" src="/images/<%= result.picture %>" alt="">
+
+			<label for="damage">Damage</label>
+			<input type="text" id="damage" name="damage" <% if (!result.damage){%>
+			value="0/0/0/0"
+			<%} else{%>
+			value="<%= result.damage %>">
+			<%}%>
+
+			<label for="aux">AUX effect</label>
+			<input type="text" id="aux" name="aux" <% if (!result.aux_effect){%>
+			value="0/0/0/0"
+			<%} else{%>
+			value="<%= result.aux_effect %>">
+			<%}%>
+
+			<label for="reduction">Damage Reduction</label>
+			<input type="text" id="reduction" name="reduction" <% if (!result.damage_reduction){%>
+			value="0/0/0/0"
+			<%} else{%>
+			value="<%= result.damage_reduction %>">
+			<%}%>
+
+			<label for="critical">Critical</label>
+			<input type="text" id="critical" name="critical" <% if (!result.critical){%>
+			value="0"
+			<%} else{%>
+			value="<%= result.critical %>">
+			<%}%>
+
+			<label for="durability">Durability</label>
+			<input type="text" id="durability" name="durability" <% if (!result.durability){%>
+			value="0"
+			<%} else{%>
+			value="<%= result.durability %>">
+			<%}%>
+
+			<label for="stability">Stability</label>
+			<input type="text" id="stability" name="stability" <% if (!result.stability){%>
+			value="0"
+			<%} else{%>
+			value="<%= result.stability %>">
+			<%}%>
+
+			<label for="weight">Weight</label>
+			<input type="text" id="weight" name="weight" <% if (!result.weight){%>
+			value="0"
+			<%} else{%>
+			value="<%= result.weight %>">
+			<%}%>
+
+			<label for="requirements">Stat requirements</label>
+			<input type="text" id="requirements" name="requirements" <% if (!result.stats_req){%>
+			value="0/0/0/0"
+			<%} else{%>
+			value="<%= result.stats_req %>">
+			<%}%>
+
+			<label for="scaling">Stat Scaling</label>
+			<input type="text" id="scaling" name="scaling" <% if (!result.stats_scale){%>
+			value="0/0/0/0"
+			<%} else{%>
+			value="<%= result.stats_scale %>">
+			<%}%>
+
+			<label for="type">Type</label>
+			<select name="type" id="type">
+				<% shield_size.forEach(type => { %>
+				<option value="<%= type.id %>" <% if (result.shield_size==type.id ){%> selected
+					<%} %>>
+					<%= type.name %>
+				</option>
+				<% }); %>
+			</select>
+
+			<label for="notes">Notes</label>
+			<textarea name="notes" id="notes" cols="30" rows="10"><%= result.notes %></textarea>
+
+			<button type="submit">Update</button>
+		</form>
+	</section>
+</main>
+<script>
+	const form = document.querySelector('.patchForm');
+	form.addEventListener('submit', function (event) {
+		event.preventDefault();
+		fetch(`/admin/shield/edit/${this.id.value}`, {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					name: form.name.value,
+					picture: form.picture.value,
+					damage: form.damage.value,
+					aux: form.aux.value,
+					reduction: form.reduction.value,
+					critical: form.critical.value,
+					durability: form.durability.value,
+					stability: form.stability.value,
+					weight: form.weight.value,
+					requirements: form.requirements.value,
+					scaling: form.scaling.value,
+					type: form.type.value,
+					notes: form.notes.value
+				})
+			})
+			.then(response => {
+				if (response.status === 200) {
+					window.location.href = '/admin/shields';
+				}
+			});
+	});
+</script>
+</body>
+
+</html>

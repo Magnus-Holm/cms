@@ -1,0 +1,49 @@
+<% include admin-partials/admin_head.ejs %>
+<% include admin-partials/headerAdmin.ejs %>
+<main role="main">
+	<% include admin-partials/navAdmin.ejs %>
+	<section>
+		<form class="patchForm">
+			<input type="hidden" name="id" value="<%= result.id %>">
+
+			<label for="name">Item Navn</label>
+			<input type="text" id="name" name="name" value="<%= result.name %>">
+
+			<label for="picture">Picture</label>
+			<input type="file" id="picture" name="picture">
+
+			<img class="itemImg" src="/images/<%= result.picture %>" alt="">
+
+			<label for="effect">Ring's effect</label>
+			<input type="text" id="effect" name="effect" value="<%= result.effect %>">
+
+
+			<button type="submit">Update</button>
+		</form>
+	</section>
+</main>
+<script>
+	const form = document.querySelector('.patchForm');
+	form.addEventListener('submit', function (event) {
+		event.preventDefault();
+		fetch(`/admin/rings/edit/${this.id.value}`, {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					name: form.name.value,
+					picture: form.picture.value,
+					effect: form.effect.value
+				})
+			})
+			.then(response => {
+				if (response.status === 200) {
+					window.location.href = '/admin/rings';
+				}
+			});
+	});
+</script>
+</body>
+
+</html>

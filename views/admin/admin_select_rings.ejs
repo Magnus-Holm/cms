@@ -1,0 +1,47 @@
+<% include admin-partials/admin_head.ejs %>
+<% include admin-partials/headerAdmin.ejs %>
+<main role="main">
+	<% include admin-partials/navAdmin.ejs %>
+	<section>
+		<a class="newData" href="/admin/rings/new">Opret et nyt hold</a>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Picture</th>
+				<th>Name</th>
+				<th>Effect</th>
+				<th>Rediger / Slet</th>
+			</tr>
+			<% results.forEach(result => { %>
+			<tr>
+				<td>
+					<%= result.id %>
+				</td>
+				<td>
+					<img class="itemImg" src="../images/<%= result.picture %>" alt="">
+				</td>
+				<td>
+					<%= result.name %>
+				</td>
+				<td>
+					<%= result.effect %>
+				</td>
+				<td>
+					<div>
+						<a href="/admin/rings/edit/<%= result.id %>">
+							<p>Rediger</p><i class="fas fa-edit"></i>
+						</a>
+						<hr>
+						<a href="/admin/rings/delete/<%= result.id %>">
+							<p>Slet</p><i class="fas fa-trash"></i>
+						</a>
+					</div>
+				</td>
+			</tr>
+			<% }); %>
+		</table>
+	</section>
+</main>
+</body>
+
+</html>

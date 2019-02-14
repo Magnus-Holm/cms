@@ -1,0 +1,10 @@
+<form action="/admin/login" method="post">
+    <label for="loginUsername">Brugernavn</label>
+    <input type="text" name="username" id="loginUsername">
+    <label for="loginPassphrase">Adgangskode</label>
+    <input type="password" name="password" id="loginPassphrase">
+    <input type="submit" value="Login">
+    <p>
+        <%= (typeof errorLogin != 'undefined') ? errorLogin : '' %>
+    </p>
+</form>
