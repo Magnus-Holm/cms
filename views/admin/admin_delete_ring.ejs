@@ -1,0 +1,51 @@
+<% include admin-partials/admin_head.ejs %>
+<% include admin-partials/headerAdmin.ejs %>
+<main role="main">
+	<% include admin-partials/navAdmin.ejs %>
+	<section>
+		<form class="deleteForm">
+			<input type="hidden" name="id" value="<%= results.id %>">
+			<p>Are you sure you want to delete this item?:</p>
+			<table>
+				<tr>
+					<th>ID</th>
+					<th>Picture</th>
+					<th>Name</th>
+					<th>Effect</th>
+				</tr>
+				<tr>
+					<td>
+						<%= results.id %>
+					</td>
+					<td>
+						<img class="itemImg" src="../images/<%= results.picture %>" alt="">
+					</td>
+					<td>
+						<%= results.name %>
+					</td>
+					<td>
+						<%= results.effect %>
+					</td>
+				</tr>
+			</table>
+			<button type="submit">Slet</button>
+		</form>
+	</section>
+</main>
+<script>
+	const form = document.querySelector('.deleteForm');
+	form.addEventListener('submit', function (event) {
+		event.preventDefault();
+		fetch(`http://localhost:3000/admin/ring/delete/${this.id.value}`, {
+				method: 'DELETE'
+			})
+			.then(response => {
+				if (response.status === 200) {
+					window.location.href = '/admin/rings';
+				}
+			});
+	});
+</script>
+</body>
+
+</html>

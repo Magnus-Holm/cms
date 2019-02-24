@@ -3,7 +3,7 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<a class="newData" href="/admin/weapons/new">Opret et nyt hold</a>
+		<a class="newData" href="/admin/weapon/new">Opret et nyt hold</a>
 		<table>
 			<tr>
 				<th>ID</th>
@@ -88,11 +88,11 @@
 				</td>
 				<td>
 					<div>
-						<a href="/admin/weapons/edit/<%= result.id %>">
+						<a href="/admin/weapon/edit/<%= result.id %>">
 							<p>Rediger</p><i class="fas fa-edit"></i>
 						</a>
 						<hr>
-						<a href="/admin/weapons/delete/<%= result.id %>">
+						<a href="/admin/weapon/delete/<%= result.id %>">
 							<p>Slet</p><i class="fas fa-trash"></i>
 						</a>
 					</div>

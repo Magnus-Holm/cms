@@ -2,8 +2,8 @@ const mysql = require('../config/mysql.js')();
 
 module.exports = function (app) {
 
-    // Load and update weapons
-    app.get('/admin/weapons/edit/:id', (req, res, next) => {
+    // Update Weapons
+    app.get('/admin/weapon/edit/:id', (req, res, next) => {
         mysql.query(`SELECT * FROM weapons WHERE id = ?`,
             [req.params.id],
             function (err, result) {
@@ -11,7 +11,7 @@ module.exports = function (app) {
                 mysql.query(`SELECT id, name FROM weapon_type`, [req.params.id],
                     function (err, weapon_type) {
                         if (err) return next(`${err} at db.query (${__filename}:8)`);
-                        res.render('admin/admin_edit_weapons', {
+                        res.render('admin/admin_edit_weapon', {
                             'title': 'admin',
                             'db': result[0].name,
                             result: result[0],
@@ -21,7 +21,7 @@ module.exports = function (app) {
             });
     });
 
-    app.patch('/admin/weapons/edit/:id', (req, res, next) => {
+    app.patch('/admin/weapon/edit/:id', (req, res, next) => {
         mysql.query(`UPDATE weapons
         SET weapons.name = ?, weapons.damage = ?, weapons.aux_effect = ?, weapons.damage_reduction = ?,
         weapons.critical = ?, weapons.durability = ?, weapons.range = ?, weapons.stability = ?,
@@ -41,7 +41,7 @@ module.exports = function (app) {
     });
 
 
-    // Load and update Spell Tools
+    // Update Spell Tools
     app.get('/admin/spell_tools/edit/:id', (req, res, next) => {
         mysql.query(`SELECT * FROM weapons WHERE id = ?`,
             [req.params.id],
@@ -80,7 +80,7 @@ module.exports = function (app) {
     });
 
 
-    // Load and update Shield
+    // Update Shield
     app.get('/admin/shield/edit/:id', (req, res, next) => {
         mysql.query(`SELECT * FROM weapons WHERE id = ?`,
             [req.params.id],
@@ -118,7 +118,7 @@ module.exports = function (app) {
         );
     });
 
-    // // Load and update Spells
+    // Update Spells
     app.get('/admin/spell/edit/:id', (req, res, next) => {
         mysql.query(`SELECT * FROM spells WHERE id = ?`,
             [req.params.id],
@@ -153,7 +153,7 @@ module.exports = function (app) {
         );
     });
 
-    // // Load and update Armor
+    // Update Armor
     app.get('/admin/armor/edit/:id', (req, res, next) => {
         mysql.query(`SELECT * FROM armor WHERE id = ?`,
             [req.params.id],
@@ -188,10 +188,7 @@ module.exports = function (app) {
         );
     });
 
-
-
-
-    // // Load and update Rings
+    // Update Rings
     app.get('/admin/rings/edit/:id', (req, res, next) => {
         mysql.query(`SELECT * FROM rings WHERE id = ?`,
             [req.params.id],
@@ -208,8 +205,39 @@ module.exports = function (app) {
     app.patch('/admin/rings/edit/:id', (req, res, next) => {
         mysql.query(`UPDATE rings
         SET rings.name = ?, rings.effect = ? WHERE rings.id = ?`,
-            [req.body.name, req.body.effect, req.params.id
-            ],
+            [req.body.name, req.body.effect, req.params.id],
+            function (err, results) {
+                if (err) return next(`${err} at db.query (${__filename}:23)`);
+                res.status(200);
+                res.end();
+            }
+        );
+    });
+
+    // Update Users
+    app.get('/admin/user/edit/:id', (req, res, next) => {
+        mysql.query(`SELECT * FROM users WHERE id = ?`,
+            [req.params.id],
+            function (err, result) {
+                if (err) return next(`${err} at db.query (${__filename}:5)`);
+                mysql.query(`SELECT id, name FROM rank`, [req.params.id],
+                    function (err, rank) {
+                        if (err) return next(`${err} at db.query (${__filename}:8)`);
+                        res.render('admin/admin_edit_user', {
+                            'title': 'admin',
+                            'db': result[0].name,
+                            result: result[0],
+                            rank: rank
+                        });
+                    });
+            });
+    });
+
+    app.patch('/admin/user/edit/:id', (req, res, next) => {
+        let hash_pass = bcrypt.hashSync(`${req.body.password}`, 10);
+        mysql.query(`UPDATE users
+        SET users.username = ?, users.password = ${hash_pass}, users.rank_id = ? WHERE users.id = ?`,
+            [req.body.username, req.body.rank_id, req.params.id],
             function (err, results) {
                 if (err) return next(`${err} at db.query (${__filename}:23)`);
                 res.status(200);

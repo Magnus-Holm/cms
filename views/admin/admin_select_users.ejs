@@ -3,23 +3,18 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<a class="newData" href="/admin/spell_tool/new">Opret et nyt hold</a>
+		<a class="newData" href="/admin/spell/new">Opret et nyt hold</a>
 		<table>
 			<tr>
 				<th>ID</th>
 				<th>Picture</th>
 				<th>Name</th>
-				<th>Magic Adjust</th>
-				<th>Damage</th>
-				<th>AUX effect</th>
-				<th>Damage Reduction</th>
-				<th>Critical</th>
-				<th>Durability</th>
-				<th>Stability</th>
-				<th>Weight</th>
-				<th>Stat requirements</th>
-				<th>Stat Scaling</th>
-				<th>Type</th>
+				<th>Effect</th>
+				<th>Uses</th>
+				<th>Attunement Slots</th>
+				<th>Spell Type</th>
+				<th>Faith Requirement</th>
+				<th>Intelligence Requirement</th>
 				<th>Notes</th>
 				<th>Rediger / Slet</th>
 			</tr>
@@ -35,41 +30,22 @@
 					<%= result.name %>
 				</td>
 				<td>
-					<%= result.mag_adjust %>
+					<%= result.effect %>
 				</td>
 				<td>
-					<%= result.damage %>
+					<%= result.uses %>
 				</td>
 				<td>
-					<% if (!result.aux_effect){%>
-					-
-					<%} else{%>
-					<%= result.aux_effect %>
-					<%} %>
+					<%= result.slots %>
 				</td>
 				<td>
-					<%= result.damage_reduction %>
+					<%= result.spell_type %>
 				</td>
 				<td>
-					<%= result.critical %>
+					<%= result.faith_need %>
 				</td>
 				<td>
-					<%= result.durability %>
-				</td>
-				<td>
-					<%= result.stability %>
-				</td>
-				<td>
-					<%= result.weight %>
-				</td>
-				<td>
-					<%= result.stats_req %>
-				</td>
-				<td>
-					<%= result.stats_scale %>
-				</td>
-				<td>
-					<%= result.spell_tool %>
+					<%= result.int_need %>
 				</td>
 				<td>
 					<% if (!result.notes){%>
@@ -80,11 +56,11 @@
 				</td>
 				<td>
 					<div>
-						<a href="/admin/spell_tool/edit/<%= result.id %>">
+						<a href="/admin/spell/edit/<%= result.id %>">
 							<p>Rediger</p><i class="fas fa-edit"></i>
 						</a>
 						<hr>
-						<a href="/admin/spell_tool/delete/<%= result.id %>">
+						<a href="/admin/spell/delete/<%= result.id %>">
 							<p>Slet</p><i class="fas fa-trash"></i>
 						</a>
 					</div>

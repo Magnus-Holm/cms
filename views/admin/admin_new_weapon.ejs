@@ -3,7 +3,7 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<form class="patchForm">
+		<form method="POST">
 			<label for="name">Item Navn</label>
 			<input type="text" id="name" name="name">
 
@@ -55,43 +55,10 @@
 			<label for="notes">Notes</label>
 			<textarea name="notes" id="notes" cols="30" rows="10"><%= result.notes %></textarea>
 
-			<button type="submit">Update</button>
+			<button type="submit">Create</button>
 		</form>
 	</section>
 </main>
-<script>
-	// const form = document.querySelector('.patchForm');
-	// form.addEventListener('submit', function (event) {
-	// 	event.preventDefault();
-	// 	fetch(`/admin/weapons/edit/${this.id.value}`, {
-	// 			method: 'PATCH',
-	// 			headers: {
-	// 				'Content-Type': 'application/json'
-	// 			},
-	// 			body: JSON.stringify({
-	// 				name: form.name.value,
-	// 				picture: form.picture.value,
-	// 				damage: form.damage.value,
-	// 				aux: form.aux.value,
-	// 				reduction: form.reduction.value,
-	// 				critical: form.critical.value,
-	// 				durability: form.durability.value,
-	// 				range: form.range.value,
-	// 				stability: form.stability.value,
-	// 				weight: form.weight.value,
-	// 				requirements: form.requirements.value,
-	// 				scaling: form.scaling.value,
-	// 				type: form.type.value,
-	// 				notes: form.notes.value
-	// 			})
-	// 		})
-	// 		.then(response => {
-	// 			if (response.status === 200) {
-	// 				window.location.href = '/admin/weapons';
-	// 			}
-	// 		});
-	// });
-</script>
 </body>
 
 </html>

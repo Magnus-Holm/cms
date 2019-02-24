@@ -7,7 +7,8 @@ module.exports = function (app) {
             'db': 'Index',
         });
     });
-    
+
+    // List Weapons
     app.get('/admin/weapons', (req, res, next) => {
         mysql.query(`SELECT weapons.id AS id, weapons.name AS name, damage, aux_effect, damage_reduction, critical, 
                     durability, weapons.range AS bow_range, stability, weight,
@@ -25,6 +26,7 @@ module.exports = function (app) {
             });
     });
 
+    // List Spell Tools
     app.get('/admin/spell_tools', (req, res, next) => {
         mysql.query(`SELECT weapons.id AS id, weapons.name AS name, mag_adjust, damage, aux_effect, damage_reduction, critical, durability, stability, weight,
                     stats_req, stats_scale, spell_tool.name AS spell_tool, notes, picture
@@ -40,6 +42,8 @@ module.exports = function (app) {
                 });
             });
     });
+
+    // List Shields
     app.get('/admin/shields', (req, res, next) => {
         mysql.query(`SELECT weapons.id AS id, weapons.name AS name, damage, aux_effect, damage_reduction, critical, 
                     durability, stability, weight,
@@ -56,6 +60,8 @@ module.exports = function (app) {
                 });
             });
     });
+
+    // List Armors
     app.get('/admin/armor', (req, res, next) => {
         mysql.query(`SELECT armor.id AS id, name, defense_physical, defense_elemental, resistance, poise, durability,
                     weight, armor_slots.slot_name AS armor_slot, notes, picture FROM cms.armor
@@ -70,6 +76,8 @@ module.exports = function (app) {
                 });
             });
     });
+
+    // List Rings
     app.get('/admin/rings', (req, res, next) => {
         mysql.query(`SELECT * FROM rings`,
             function (err, results) {
@@ -81,6 +89,8 @@ module.exports = function (app) {
                 });
             });
     });
+
+    // List Spells
     app.get('/admin/spells', (req, res, next) => {
         mysql.query(`SELECT spells.id, spells.name AS name, effect, uses, slots,
                     spell_types.name AS spell_type, faith_need, int_need, notes, picture
@@ -96,4 +106,16 @@ module.exports = function (app) {
             });
     });
 
+    // List Users
+    app.get('/admin/users', (req, res, next) => {
+        mysql.query(`SELECT * FROM users`,
+            function (err, results) {
+                if (err) return next(`${err} at db.query (${__filename}:68)`);
+                res.render('admin/admin_select_users', {
+                    'title': 'admin',
+                    'db': 'Ssers',
+                    'results': results
+                });
+            });
+    });
 };

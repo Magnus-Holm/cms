@@ -1,0 +1,79 @@
+<% include admin-partials/admin_head.ejs %>
+<% include admin-partials/headerAdmin.ejs %>
+<main role="main">
+	<% include admin-partials/navAdmin.ejs %>
+	<section>
+		<form class="deleteForm">
+			<input type="hidden" name="id" value="<%= results.id %>">
+			<p>Are you sure you want to delete this item?:</p>
+			<table>
+				<tr>
+					<th>ID</th>
+					<th>Picture</th>
+					<th>Name</th>
+					<th>Effect</th>
+					<th>Uses</th>
+					<th>Attunement Slots</th>
+					<th>Spell Type</th>
+					<th>Faith Requirement</th>
+					<th>Intelligence Requirement</th>
+					<th>Notes</th>
+				</tr>
+				<tr>
+					<td>
+						<%= results.id %>
+					</td>
+					<td>
+						<img class="itemImg" src="../images/<%= results.picture %>" alt="">
+					</td>
+					<td>
+						<%= results.name %>
+					</td>
+					<td>
+						<%= results.effect %>
+					</td>
+					<td>
+						<%= results.uses %>
+					</td>
+					<td>
+						<%= results.slots %>
+					</td>
+					<td>
+						<%= results.spell_type %>
+					</td>
+					<td>
+						<%= results.faith_need %>
+					</td>
+					<td>
+						<%= results.int_need %>
+					</td>
+					<td>
+						<% if (!results.notes){%>
+						-
+						<%} else{%>
+						<%= results.notes %>
+						<%} %>
+					</td>
+				</tr>
+			</table>
+			<button type="submit">Slet</button>
+		</form>
+	</section>
+</main>
+<script>
+	const form = document.querySelector('.deleteForm');
+	form.addEventListener('submit', function (event) {
+		event.preventDefault();
+		fetch(`http://localhost:3000/admin/spell/delete/${this.id.value}`, {
+				method: 'DELETE'
+			})
+			.then(response => {
+				if (response.status === 200) {
+					window.location.href = '/admin/spells';
+				}
+			});
+	});
+</script>
+</body>
+
+</html>

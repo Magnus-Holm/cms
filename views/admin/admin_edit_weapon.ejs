@@ -105,7 +105,7 @@
 	const form = document.querySelector('.patchForm');
 	form.addEventListener('submit', function (event) {
 		event.preventDefault();
-		fetch(`/admin/weapons/edit/${this.id.value}`, {
+		fetch(`/admin/weapon/edit/${this.id.value}`, {
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json'
