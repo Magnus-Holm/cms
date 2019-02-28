@@ -3,10 +3,10 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<form class="patchForm">
+		<form action="/admin/ring/edit/<%= result.id %>" class="patchForm" enctype="multipart/form-data">
 			<input type="hidden" name="id" value="<%= result.id %>">
 
-			<label for="name">Item Navn</label>
+			<label for="name">Item Name</label>
 			<input type="text" id="name" name="name" value="<%= result.name %>">
 
 			<label for="picture">Picture</label>
@@ -26,16 +26,14 @@
 	const form = document.querySelector('.patchForm');
 	form.addEventListener('submit', function (event) {
 		event.preventDefault();
-		fetch(`/admin/rings/edit/${this.id.value}`, {
+		let formData = new FormData();
+		formData.append('name', form.name.value)
+		formData.append('picture', form.picture)
+		formData.append('effect', form.effect.value)
+
+		fetch(`/admin/ring/edit/${this.id.value}`, {
 				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					name: form.name.value,
-					picture: form.picture.value,
-					effect: form.effect.value
-				})
+				body: formData
 			})
 			.then(response => {
 				if (response.status === 200) {

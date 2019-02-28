@@ -25,62 +25,62 @@
 				</tr>
 				<tr>
 					<td>
-						<%= result.id %>
+						<%= results.id %>
 					</td>
 					<td>
-						<img class="itemImg" src="../images/<%= result.picture %>" alt="">
+						<img class="itemImg" src="../images/<%= results.picture %>" alt="">
 					</td>
 					<td>
-						<%= result.name %>
+						<%= results.name %>
 					</td>
 					<td>
-						<%= result.damage %>
+						<%= results.damage %>
 					</td>
 					<td>
-						<% if (!result.aux_effect){%>
+						<% if (!results.aux_effect){%>
 						-
 						<%} else{%>
-						<%= result.aux_effect %>
+						<%= results.aux_effect %>
 						<%} %>
 					</td>
 					<td>
-						<% if (!result.critical){%>
+						<% if (!results.critical){%>
 						-
 						<%} else{%>
-						<%= result.critical %>
+						<%= results.critical %>
 						<%} %>
 					</td>
 					<td>
-						<%= result.damage_reduction %>
+						<%= results.damage_reduction %>
 					</td>
 					<td>
-						<%= result.durability %>
+						<%= results.durability %>
 					</td>
 					<td>
-						<%= result.stability %>
+						<%= results.stability %>
 					</td>
 					<td>
-						<%= result.weight %>
+						<%= results.weight %>
 					</td>
 					<td>
-						<%= result.stats_req %>
+						<%= results.stats_req %>
 					</td>
 					<td>
-						<%= result.stats_scale %>
+						<%= results.stats_scale %>
 					</td>
 					<td>
-						<%= result.shield_size %>
+						<%= results.shield_size %>
 					</td>
 					<td>
-						<% if (!result.notes){%>
+						<% if (!results.notes){%>
 						-
 						<%} else{%>
-						<%= result.notes %>
+						<%= results.notes %>
 						<%} %>
 					</td>
 				</tr>
 			</table>
-			<button type="submit">Slet</button>
+			<button type="submit">Delete</button>
 		</form>
 	</section>
 </main>

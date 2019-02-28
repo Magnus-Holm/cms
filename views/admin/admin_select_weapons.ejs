@@ -3,7 +3,7 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<a class="newData" href="/admin/weapon/new">Opret et nyt hold</a>
+		<a class="newData" href="/admin/weapon/new">Create a new weapon</a>
 		<table>
 			<tr>
 				<th>ID</th>
@@ -21,7 +21,7 @@
 				<th>Stat Scaling</th>
 				<th>Type</th>
 				<th>Notes</th>
-				<th>Rediger / Slet</th>
+				<th>Edit / Delete</th>
 			</tr>
 			<% results.forEach(result => { %>
 			<tr>
@@ -89,11 +89,11 @@
 				<td>
 					<div>
 						<a href="/admin/weapon/edit/<%= result.id %>">
-							<p>Rediger</p><i class="fas fa-edit"></i>
+							<p>Edit</p><i class="fas fa-edit"></i>
 						</a>
 						<hr>
 						<a href="/admin/weapon/delete/<%= result.id %>">
-							<p>Slet</p><i class="fas fa-trash"></i>
+							<p>Delete</p><i class="fas fa-trash"></i>
 						</a>
 					</div>
 				</td>

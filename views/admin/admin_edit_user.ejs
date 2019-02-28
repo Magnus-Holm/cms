@@ -3,47 +3,29 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<form class="patchForm">
+		<form action="/admin/user/edit/<%= result.id %>" class="patchForm" enctype="multipart/form-data">
 			<input type="hidden" name="id" value="<%= result.id %>">
 
-			<label for="name">Item Navn</label>
-			<input type="text" id="name" name="name" value="<%= result.name %>">
+			<label for="username">Username</label>
+			<input type="text" id="username" name="username" value="<%= result.username %>">
 
 			<label for="picture">Picture</label>
 			<input type="file" id="picture" name="picture">
 
 			<img class="itemImg" src="/images/<%= result.picture %>" alt="">
 
-			<label for="effect">Spell Effect</label>
-			<input type="text" id="effect" name="effect" value="<%= result.effect %>">
+			<label for="password">Password</label>
+			<input type="text" id="password" name="password" value="<%= result.password %>">
 
-
-			<label for="uses">Uses</label>
-			<input type="text" id="uses" name="uses" value="<%= result.uses %>">
-
-
-			<label for="slots">Attunement slots</label>
-			<input type="text" id="slots" name="slots" value="<%= result.slots %>">
-
-
-			<label for="faith">Faith Requirement</label>
-			<input type="text" id="faith" name="faith" value="<%= result.faith_need %>">
-
-			<label for="intelligence">Intelligence Requirement</label>
-			<input type="text" id="intelligence" name="intelligence" value="<%= result.int_need %>">
-
-			<label for="type">Type</label>
-			<select name="type" id="type">
-				<% spell_types.forEach(type => { %>
-				<option value="<%= type.id %>" <% if (result.spell_type==type.id ){%> selected
+			<label for="rank">Rank</label>
+			<select name="rank" id="rank">
+				<% rank.forEach(rank => { %>
+				<option value="<%= rank.id %>" <% if (result.rank_id==rank.id ){%> selected
 					<%} %>>
-					<%= type.name %>
+					<%= rank.name %>
 				</option>
 				<% }); %>
 			</select>
-
-			<label for="notes">Notes</label>
-			<textarea name="notes" id="notes" cols="30" rows="10"><%= result.notes %></textarea>
 
 			<button type="submit">Update</button>
 		</form>
@@ -53,26 +35,19 @@
 	const form = document.querySelector('.patchForm');
 	form.addEventListener('submit', function (event) {
 		event.preventDefault();
-		fetch(`/admin/spell/edit/${this.id.value}`, {
+		let formData = new FormData();
+		formData.append('username', form.username.value)
+		formData.append('password', form.password.value)
+		formData.append('picture', form.picture)
+		formData.append('rank', form.rank.value)
+
+		fetch(`/admin/user/edit/${this.id.value}`, {
 				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					name: form.name.value,
-					picture: form.picture.value,
-					effect: form.effect.value,
-					uses: form.uses.value,
-					slots: form.slots.value,
-					faith: form.faith.value,
-					intelligence: form.intelligence.value,
-					type: form.type.value,
-					notes: form.notes.value
-				})
+				body: formData
 			})
 			.then(response => {
 				if (response.status === 200) {
-					window.location.href = '/admin/spells';
+					window.location.href = '/admin/users';
 				}
 			});
 	});

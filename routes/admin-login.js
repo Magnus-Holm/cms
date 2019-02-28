@@ -2,18 +2,19 @@ const mysql = require('../config/mysql.js')();
 const bcrypt = require('bcryptjs');
 
 module.exports = function (app) {
-    app.get('/admin/login', (req, res) => {
+    app.get('/admin/login', (req, res, next) => {
         res.render('admin/login', {
-            'title': 'Log in'
+            'title': 'Log in',
+            'session': req.session.user
         });
     });
 
     app.post('/admin/login', (req, res, next) => {
         mysql.query(`SELECT id, password FROM users 
             WHERE username = ?`,
-            [req.body.username], (err, result) => {
-                if (err) return next(`${err} at db.query (${__filename}:16)`);
-                if (bcrypt.compareSync(req.body.password, result[0].password)) {
+            [req.fields.username], (err, result) => {
+                if (err) return next(`${err} at db.query (${__filename}:12)`);
+                if (bcrypt.compareSync(req.fields.password, result[0].password)) {
                     req.session.user = result[0].id;
                     res.redirect('/admin');
                 } else {
@@ -32,7 +33,7 @@ module.exports = function (app) {
         } else {
             mysql.query(`SELECT rank_id AS rank from users
                     WHERE id = ?`, [req.session.user], function (err, rank) {
-                if (err) return next(`${err} at db.query (${__filename}:9)`);
+                if (err) return next(`${err} at db.query (${__filename}:33)`);
                 if (rank[0].rank !== 1) {
                     res.render('admin/login', {
                         'title': 'Log in',

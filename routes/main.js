@@ -1,7 +1,8 @@
 module.exports = function (app) {
-    app.get('/', (req, res) => {
+    app.get('/', (req, res, next) => {
         res.render('page', {
-            'title': 'login',
+            'title': 'Front page',
+            'session': req.session.user
         });
     });
 };

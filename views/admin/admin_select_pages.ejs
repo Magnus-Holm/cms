@@ -1,0 +1,39 @@
+<% include admin-partials/admin_head.ejs %>
+<% include admin-partials/headerAdmin.ejs %>
+<main role="main">
+	<% include admin-partials/navAdmin.ejs %>
+	<section>
+		<a class="newData" href="/admin/page/new">Create a new page</a>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Title</th>
+				<th>Edit / Delete</th>
+			</tr>
+			<% results.forEach(result => { %>
+			<tr>
+				<td>
+					<%= result.id %>
+				</td>
+				<td>
+					<%= result.title %>
+				</td>
+				<td>
+					<div>
+						<a href="/admin/page/edit/<%= result.id %>">
+							<p>Edit</p><i class="fas fa-edit"></i>
+						</a>
+						<hr>
+						<a href="/admin/page/delete/<%= result.id %>">
+							<p>Delete</p><i class="fas fa-trash"></i>
+						</a>
+					</div>
+				</td>
+			</tr>
+			<% }); %>
+		</table>
+	</section>
+</main>
+</body>
+
+</html>

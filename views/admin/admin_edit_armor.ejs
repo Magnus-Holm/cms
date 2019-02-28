@@ -3,10 +3,10 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<form class="patchForm">
+		<form action="/admin/armor/edit/<%= result.id %>" class="patchForm" enctype="multipart/form-data">
 			<input type="hidden" name="id" value="<%= result.id %>">
 
-			<label for="name">Item Navn</label>
+			<label for="name">Item Name</label>
 			<input type="text" id="name" name="name" value="<%= result.name %>">
 
 			<label for="picture">Picture</label>
@@ -16,7 +16,6 @@
 
 			<label for="physical">Physical Defense</label>
 			<input type="text" id="physical" name="physical" value="<%= result.defense_physical %>">
-
 
 			<label for="elemental">Elemental Defense</label>
 			<input type="text" id="elemental" name="elemental" value="<%= result.defense_elemental %>">
@@ -58,23 +57,21 @@
 	const form = document.querySelector('.patchForm');
 	form.addEventListener('submit', function (event) {
 		event.preventDefault();
+		let formData = new FormData();
+		formData.append('name', form.name.value)
+		formData.append('picture', form.picture)
+		formData.append('physical', form.physical.value)
+		formData.append('elemental', form.elemental.value)
+		formData.append('resistance', form.resistance.value)
+		formData.append('poise', form.poise.value)
+		formData.append('durability', form.durability.value)
+		formData.append('weight', form.weight.value)
+		formData.append('type', form.type.value)
+		formData.append('notes', form.notes.value)
+
 		fetch(`/admin/armor/edit/${this.id.value}`, {
 				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					name: form.name.value,
-					picture: form.picture.value,
-					physical: form.physical.value,
-					elemental: form.elemental.value,
-					resistance: form.resistance.value,
-					poise: form.poise.value,
-					durability: form.durability.value,
-					weight: form.weight.value,
-					type: form.type.value,
-					notes: form.notes.value
-				})
+				body: formData
 			})
 			.then(response => {
 				if (response.status === 200) {

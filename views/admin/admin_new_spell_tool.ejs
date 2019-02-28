@@ -3,8 +3,8 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<form method="POST">
-			<label for="name">Item Navn</label>
+		<form action="/admin/spell_tool/new" method="POST" enctype="multipart/form-data">
+			<label for="name">Item Name</label>
 			<input type="text" id="name" name="name">
 
 			<label for="picture">Picture</label>

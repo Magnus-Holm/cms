@@ -3,8 +3,8 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<form method="POST">
-			<label for="name">Item Navn</label>
+		<form action="/admin/armor/new" method="POST" enctype="multipart/form-data">
+			<label for="name">Item Name</label>
 			<input type="text" id="name" name="name">
 
 			<label for="picture">Picture</label>
@@ -37,7 +37,7 @@
 
 			<label for="type">Armor Slot</label>
 			<select name="type" id="type">
-				<% armor_slot.forEach(type => { %>
+				<% armor_slots.forEach(type => { %>
 				<option value="<%= type.id %>" <% if (result.armor_slot==type.id ){%> selected
 					<%} %>>
 					<%= type.slot_name %>

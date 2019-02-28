@@ -3,10 +3,10 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<form class="patchForm">
+		<form action="/admin/weapon/edit/<%= result.id %>" class="patchForm" enctype="multipart/form-data">
 			<input type="hidden" name="id" value="<%= result.id %>">
 
-			<label for="name">Item Navn</label>
+			<label for="name">Item Name</label>
 			<input type="text" id="name" name="name" value="<%= result.name %>">
 
 			<label for="picture">Picture</label>
@@ -105,27 +105,24 @@
 	const form = document.querySelector('.patchForm');
 	form.addEventListener('submit', function (event) {
 		event.preventDefault();
+		let formData = new FormData();
+		formData.append('name', form.name.value)
+		formData.append('picture', form.picture)
+		formData.append('damage', form.damage.value)
+		formData.append('aux', form.aux.value)
+		formData.append('reduction', form.reduction.value)
+		formData.append('critical', form.critical.value)
+		formData.append('durability', form.durability.value)
+		formData.append('range', form.range.value)
+		formData.append('stability', form.stability.value)
+		formData.append('weight', form.weight.value)
+		formData.append('requirements', form.requirements.value)
+		formData.append('scaling', form.scaling.value)
+		formData.append('type', form.type.value)
+		formData.append('notes', form.notes.value)
 		fetch(`/admin/weapon/edit/${this.id.value}`, {
 				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					name: form.name.value,
-					picture: form.picture.value,
-					damage: form.damage.value,
-					aux: form.aux.value,
-					reduction: form.reduction.value,
-					critical: form.critical.value,
-					durability: form.durability.value,
-					range: form.range.value,
-					stability: form.stability.value,
-					weight: form.weight.value,
-					requirements: form.requirements.value,
-					scaling: form.scaling.value,
-					type: form.type.value,
-					notes: form.notes.value
-				})
+				body: formData
 			})
 			.then(response => {
 				if (response.status === 200) {

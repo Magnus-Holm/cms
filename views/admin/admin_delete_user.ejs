@@ -10,14 +10,9 @@
 				<tr>
 					<th>ID</th>
 					<th>Picture</th>
-					<th>Name</th>
-					<th>Effect</th>
-					<th>Uses</th>
-					<th>Attunement Slots</th>
-					<th>Spell Type</th>
-					<th>Faith Requirement</th>
-					<th>Intelligence Requirement</th>
-					<th>Notes</th>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Rank</th>
 				</tr>
 				<tr>
 					<td>
@@ -27,36 +22,16 @@
 						<img class="itemImg" src="../images/<%= results.picture %>" alt="">
 					</td>
 					<td>
-						<%= results.name %>
+						<%= results.username %>
 					</td>
 					<td>
-						<%= results.effect %>
+						<%= results.password %>
 					</td>
 					<td>
-						<%= results.uses %>
+						<%= results.rank %>
 					</td>
-					<td>
-						<%= results.slots %>
-					</td>
-					<td>
-						<%= results.spell_type %>
-					</td>
-					<td>
-						<%= results.faith_need %>
-					</td>
-					<td>
-						<%= results.int_need %>
-					</td>
-					<td>
-						<% if (!results.notes){%>
-						-
-						<%} else{%>
-						<%= results.notes %>
-						<%} %>
-					</td>
-				</tr>
 			</table>
-			<button type="submit">Slet</button>
+			<button type="submit">Delete</button>
 		</form>
 	</section>
 </main>
@@ -64,12 +39,12 @@
 	const form = document.querySelector('.deleteForm');
 	form.addEventListener('submit', function (event) {
 		event.preventDefault();
-		fetch(`http://localhost:3000/admin/spell/delete/${this.id.value}`, {
+		fetch(`http://localhost:3000/admin/user/delete/${this.id.value}`, {
 				method: 'DELETE'
 			})
 			.then(response => {
 				if (response.status === 200) {
-					window.location.href = '/admin/spells';
+					window.location.href = '/admin/users';
 				}
 			});
 	});

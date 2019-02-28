@@ -1,7 +1,7 @@
 const mysql = require('../config/mysql.js')();
 
 module.exports = function (app) {
-    app.get('/admin', (req, res) => {
+    app.get('/admin', (req, res, next) => {
         res.render('admin/adminIndex', {
             'title': 'admin',
             'db': 'Index',
@@ -17,7 +17,7 @@ module.exports = function (app) {
                     INNER JOIN weapon_type ON weapons.weapon_type = weapon_type.id
                     WHERE weapon_type IS NOT NULL`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:6)`);
+                if (err) return next(`${err} at db.query (${__filename}:13)`);
                 res.render('admin/admin_select_weapons', {
                     'title': 'admin',
                     'db': 'Weapons',
@@ -34,7 +34,7 @@ module.exports = function (app) {
                     INNER JOIN spell_tool ON weapons.spell_tool_type = spell_tool.id
                     WHERE spell_tool_type IS NOT NULL`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:23)`);
+                if (err) return next(`${err} at db.query (${__filename}:31)`);
                 res.render('admin/admin_select_spell_tools', {
                     'title': 'admin',
                     'db': 'Spell Tools',
@@ -50,9 +50,10 @@ module.exports = function (app) {
                     stats_req, stats_scale, shield_size.name AS shield_size, notes, picture
                     FROM weapons
                     INNER JOIN shield_size ON weapons.shield_size = shield_size.id
-                    WHERE shield_size IS NOT NULL`,
+                    WHERE shield_size IS NOT NULL
+                    ORDER BY weapons.id`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:38)`);
+                if (err) return next(`${err} at db.query (${__filename}:48)`);
                 res.render('admin/admin_select_shields', {
                     'title': 'admin',
                     'db': 'Shields',
@@ -68,7 +69,7 @@ module.exports = function (app) {
                     INNER JOIN armor_slots ON armor.armor_slot = armor_slots.id
                     ORDER BY armor.id`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:54)`);
+                if (err) return next(`${err} at db.query (${__filename}:66)`);
                 res.render('admin/admin_select_armor', {
                     'title': 'admin',
                     'db': 'Armor',
@@ -81,10 +82,23 @@ module.exports = function (app) {
     app.get('/admin/rings', (req, res, next) => {
         mysql.query(`SELECT * FROM rings`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:68)`);
+                if (err) return next(`${err} at db.query (${__filename}:82)`);
                 res.render('admin/admin_select_rings', {
                     'title': 'admin',
                     'db': 'Rings',
+                    'results': results
+                });
+            });
+    });
+
+    // List Pages
+    app.get('/admin/pages', (req, res, next) => {
+        mysql.query(`SELECT * FROM pages`,
+            function (err, results) {
+                if (err) return next(`${err} at db.query (${__filename}:82)`);
+                res.render('admin/admin_select_pages', {
+                    'title': 'admin',
+                    'db': 'Pages',
                     'results': results
                 });
             });
@@ -97,7 +111,7 @@ module.exports = function (app) {
                     FROM cms.spells
                     INNER JOIN spell_types ON spells.spell_type = spell_types.id`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:79)`);
+                if (err) return next(`${err} at db.query (${__filename}:95)`);
                 res.render('admin/admin_select_spells', {
                     'title': 'admin',
                     'db': 'Spells',
@@ -108,12 +122,13 @@ module.exports = function (app) {
 
     // List Users
     app.get('/admin/users', (req, res, next) => {
-        mysql.query(`SELECT * FROM users`,
+        mysql.query(`SELECT users.id, users.username, users.password, users.picture, rank.name AS rank FROM users
+        INNER JOIN cms.rank ON users.rank_id = rank.id`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:68)`);
+                if (err) return next(`${err} at db.query (${__filename}:111)`);
                 res.render('admin/admin_select_users', {
                     'title': 'admin',
-                    'db': 'Ssers',
+                    'db': 'Users',
                     'results': results
                 });
             });

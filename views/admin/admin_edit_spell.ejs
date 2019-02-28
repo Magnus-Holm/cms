@@ -3,10 +3,10 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<form class="patchForm">
+		<form action="/admin/spell/edit/<%= result.id %>" class="patchForm" enctype="multipart/form-data">
 			<input type="hidden" name="id" value="<%= result.id %>">
 
-			<label for="name">Item Navn</label>
+			<label for="name">Item Name</label>
 			<input type="text" id="name" name="name" value="<%= result.name %>">
 
 			<label for="picture">Picture</label>
@@ -53,22 +53,20 @@
 	const form = document.querySelector('.patchForm');
 	form.addEventListener('submit', function (event) {
 		event.preventDefault();
+		let formData = new FormData();
+		formData.append('name', form.name.value)
+		formData.append('picture', form.picture)
+		formData.append('effect', form.effect.value)
+		formData.append('uses', form.uses.value)
+		formData.append('slots', form.slots.value)
+		formData.append('faith', form.faith.value)
+		formData.append('intelligence', form.intelligence.value)
+		formData.append('type', form.type.value)
+		formData.append('notes', form.notes.value)
+
 		fetch(`/admin/spell/edit/${this.id.value}`, {
 				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					name: form.name.value,
-					picture: form.picture.value,
-					effect: form.effect.value,
-					uses: form.uses.value,
-					slots: form.slots.value,
-					faith: form.faith.value,
-					intelligence: form.intelligence.value,
-					type: form.type.value,
-					notes: form.notes.value
-				})
+				body: formData
 			})
 			.then(response => {
 				if (response.status === 200) {

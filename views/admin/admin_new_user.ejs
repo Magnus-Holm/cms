@@ -3,45 +3,27 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<form method="POST">
-			<label for="name">Item Navn</label>
-			<input type="text" id="name" name="name">
+		<form action="/admin/user/new" method="POST" enctype="multipart/form-data">
+			<label for="username">Username</label>
+			<input type="text" id="username" name="username">
 
 			<label for="picture">Picture</label>
 			<input type="file" id="picture" name="picture">
 
 			<img class="itemImg" src="" alt="">
 
-			<label for="effect">Spell Effect</label>
-			<input type="text" id="effect" name="effect">
+			<label for="password">Password</label>
+			<input type="text" id="password" name="password">
 
-
-			<label for="uses">Uses</label>
-			<input type="text" id="uses" name="uses" value="0">
-
-
-			<label for="slots">Attunement slots</label>
-			<input type="text" id="slots" name="slots" value="0">
-
-
-			<label for="faith">Faith Requirement</label>
-			<input type="text" id="faith" name="faith" value="0">
-
-			<label for="intelligence">Intelligence Requirement</label>
-			<input type="text" id="intelligence" name="intelligence" value="0">
-
-			<label for="type">Type</label>
-			<select name="type" id="type">
-				<% spell_types.forEach(type => { %>
-				<option value="<%= type.id %>" <% if (result.spell_type==type.id ){%> selected
+			<label for="rank">Rank</label>
+			<select name="rank" id="rank">
+				<% rank.forEach(rank => { %>
+				<option value="<%= rank.id %>" <% if (result.rank_id==rank.id ){%> selected
 					<%} %>>
-					<%= type.name %>
+					<%= rank.name %>
 				</option>
 				<% }); %>
 			</select>
-
-			<label for="notes">Notes</label>
-			<textarea name="notes" id="notes" cols="30" rows="10"></textarea>
 
 			<button type="submit">Create</button>
 		</form>

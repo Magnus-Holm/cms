@@ -1,3 +1,10 @@
 <div id="wrapper">
-<header>
-</header>
+    <header>
+        <h1>DSDB</h1>
+        <% if(!session){%>
+        <a href="/login">Login</a>
+        <%} else if(session){%>
+        <a href="/logout">Logout</a>
+        <%}%>
+
+    </header>

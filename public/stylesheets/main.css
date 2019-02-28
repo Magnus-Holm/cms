@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+}
+
+#wrapper {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: 111.5px 100%;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    grid-column: 1 / span 2;
+    background-color: darkgrey;
+}
+
+header h1 {
+    font-size: 45px;
+    margin: 30.15px auto;
+}
+
+header a {
+    background-color: lightgrey;
+    font-size: 20px;
+    align-self: flex-end;
+    padding: 10px;
+}
+
+
+aside {
+    background-color: lightgrey;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+nav ul {
+    padding: 0;
+}
+
+#innerNav {
+    padding-left: 25px
+}
+
+main form {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainTop {
+    text-align: center;
+}
+
+.mainTop h2 {
+    font-size: 40px;
+}
+
+.mainTop p {
+    width: 50%;
+    text-align: justify;
+    margin: 20px auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.itemImg {
+    width: 100px;
+}
+
+.itemLink {
+    font-size: 24px;
+}
+
+.singleItem {
+    width: auto;
+    height: 200px;
+}
+
+.tableSingle {
+    border-collapse: collapse;
+    text-align: center;
+    margin: auto;
+}
+
+.tableSingle,
+.tableSingle th,
+.tableSingle td {
+    border: 1px solid black;
+}
+
+.tableSingle th {
+    font-size: 16px;
+    padding: 10px;
+}
+
+.tableSingle td {
+    font-size: 18px;
+    padding: 10px;
+}
+
+#tableKey{
+    width: 75%;
+    margin: 20px auto 10px;
+}

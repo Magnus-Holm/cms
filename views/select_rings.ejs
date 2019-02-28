@@ -1,0 +1,24 @@
+<% include partials/head.ejs %>
+<% include partials/header.ejs %>
+<aside>
+    <% include partials/menu.ejs %>
+</aside>
+<main>
+    
+        <table>
+            <% results.forEach(result => { %>
+            <tr>
+                <td>
+                    <img class="itemImg" src="../images/<%= result.picture %>" alt="">
+                </td>
+                <td>
+                    <a href="/rings/<%= result.id %>" class="itemLink">
+                        <%= result.name %></a>
+                </td>
+            </tr>
+            <% }); %>
+        </table>
+    
+</main>
+<% include partials/footer.ejs %>
+<% include partials/after-footer.ejs %>

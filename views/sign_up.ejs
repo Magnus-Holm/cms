@@ -1,0 +1,16 @@
+<% include partials/head.ejs %>
+<% include partials/header.ejs %>
+<aside>
+    <% include partials/menu.ejs %>
+</aside>
+<main>
+    <form action="/sign_up" method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+        <button type="submit">Sign up</button>
+    </form>
+</main>
+<% include partials/footer.ejs %>
+<% include partials/after-footer.ejs %>

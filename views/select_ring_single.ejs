@@ -1,0 +1,13 @@
+<% include partials/head.ejs %>
+<% include partials/header.ejs %>
+<aside>
+    <% include partials/menu.ejs %>
+</aside>
+<main>
+    <img class="itemImg" src="../images/<%= result.picture %>" alt="">
+    <h2>
+        <%= result.name %>
+    </h2>
+</main>
+<% include partials/footer.ejs %>
+<% include partials/after-footer.ejs %>

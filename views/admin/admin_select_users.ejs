@@ -3,20 +3,15 @@
 <main role="main">
 	<% include admin-partials/navAdmin.ejs %>
 	<section>
-		<a class="newData" href="/admin/spell/new">Opret et nyt hold</a>
+		<a class="newData" href="/admin/user/new">Create a new user</a>
 		<table>
 			<tr>
 				<th>ID</th>
 				<th>Picture</th>
-				<th>Name</th>
-				<th>Effect</th>
-				<th>Uses</th>
-				<th>Attunement Slots</th>
-				<th>Spell Type</th>
-				<th>Faith Requirement</th>
-				<th>Intelligence Requirement</th>
-				<th>Notes</th>
-				<th>Rediger / Slet</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>Rank</th>
+				<th>Edit / Delete</th>
 			</tr>
 			<% results.forEach(result => { %>
 			<tr>
@@ -27,41 +22,22 @@
 					<img class="itemImg" src="../images/<%= result.picture %>" alt="">
 				</td>
 				<td>
-					<%= result.name %>
+					<%= result.username %>
 				</td>
 				<td>
-					<%= result.effect %>
+					<%= result.password %>
 				</td>
 				<td>
-					<%= result.uses %>
-				</td>
-				<td>
-					<%= result.slots %>
-				</td>
-				<td>
-					<%= result.spell_type %>
-				</td>
-				<td>
-					<%= result.faith_need %>
-				</td>
-				<td>
-					<%= result.int_need %>
-				</td>
-				<td>
-					<% if (!result.notes){%>
-					-
-					<%} else{%>
-					<%= result.notes %>
-					<%} %>
+					<%= result.rank %>
 				</td>
 				<td>
 					<div>
-						<a href="/admin/spell/edit/<%= result.id %>">
-							<p>Rediger</p><i class="fas fa-edit"></i>
+						<a href="/admin/user/edit/<%= result.id %>">
+							<p>Edit</p><i class="fas fa-edit"></i>
 						</a>
 						<hr>
-						<a href="/admin/spell/delete/<%= result.id %>">
-							<p>Slet</p><i class="fas fa-trash"></i>
+						<a href="/admin/user/delete/<%= result.id %>">
+							<p>Delete</p><i class="fas fa-trash"></i>
 						</a>
 					</div>
 				</td>
