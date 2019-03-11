@@ -4,10 +4,209 @@
     <% include partials/menu.ejs %>
 </aside>
 <main>
-    <img class="itemImg" src="../images/<%= result.picture %>" alt="">
-    <h2>
-        <%= result.name %>
-    </h2>
+    <div class="mainTop">
+        <h2>
+            <%= result.name %>
+        </h2>
+        <img class="singleItem" src="../images/<%= result.picture %>" alt="">
+        <p <% if (!result.notes || result.notes=='-' ){%>
+            class="hidden"
+            <%} %>>
+            <%= (typeof result.notes != 'undefined') ? result.notes : '' %>
+        </p>
+    </div>
+    <table class="tableSingle">
+        <tr>
+            <th>Damage</th>
+            <th>AUX effect</th>
+            <th>Damage Reduction</th>
+            <th>Critical</th>
+            <th>Durability</th>
+            <th>Stability</th>
+            <th>Weight</th>
+            <th>Stat requirements</th>
+            <th>Stat Scaling</th>
+            <th>Type</th>
+        </tr>
+        <tr>
+            <td>
+                <%= result.damage %>
+            </td>
+            <td>
+                <% if (!result.aux_effect){%>
+                -
+                <%} else{%>
+                <%= result.aux_effect %>
+                <%} %>
+            </td>
+            <td>
+                <%= result.damage_reduction %>
+            </td>
+            <td>
+                <% if (!result.critical){%>
+                -
+                <%} else{%>
+                <%= result.critical %>
+                <%} %>
+            </td>
+            <td>
+                <%= result.durability %>
+            </td>
+            <td>
+                <%= result.stability %>
+            </td>
+            <td>
+                <%= result.weight %>
+            </td>
+            <td>
+                <%= result.stats_req %>
+            </td>
+            <td>
+                <%= result.stats_scale %>
+            </td>
+            <td>
+                <%= result.shield_size %>
+            </td>
+        </tr>
+    </table>
+    <div id="tableKey">
+
+        <h3>
+            Key
+        </h3>
+        <p>
+            <strong>Damage:</strong>
+            <br>
+            The Damage stat dictates how much damage the weapon does. The Damage stats for a weapon are W / X / Y / Z:
+            <ul>
+                <li>
+                    W is Physical Damage
+                </li>
+                <li>
+                    X is Magical Damage
+                </li>
+                <li>
+                    Y is Fire Damage
+                </li>
+                <li>
+                    Z is Lightning Damage
+                </li>
+            </ul>
+        </p>
+        <p>
+            <strong>AUX effect:</strong>
+            <br>
+            The AUX effect of a weapon dictates how much bleeding, poison, holy or dark damage the weapon does. The AUX
+            effect for a weapon are W / X / Y / Z:
+            <ul>
+                <li>
+                    W is Bleed Damage
+                </li>
+                <li>
+                    X is Poison Damage
+                </li>
+                <li>
+                    Y is Holy Damage
+                </li>
+                <li>
+                    Z is Dark Damage
+                </li>
+            </ul>
+        </p>
+        <p>
+            <strong>Damage Reduction %:</strong>
+            <br>
+            The Damage Reduction stat dictates the percentage of damage reduced while blocking. The Damage Reduction
+            stats
+            for a weapon are W / X / Y / Z:
+            <ul>
+                <li>
+                    W is the Physical Damage Reduction
+                </li>
+                <li>
+                    X is the Magical Damage Reduction
+                </li>
+                <li>
+                    Y is the Fire Damage Reduction
+                </li>
+                <li>
+                    Z is the Lightning Damage Reduction
+                </li>
+            </ul>
+        </p>
+        <p>
+            <strong>Critical:</strong>
+            <br>
+            The damage bonus for backstabs and ripostes. Thrusting Swords and Daggers get
+            an invisible bonus
+            to
+            critical damage as well.
+        </p>
+        <p>
+            <strong>Durability:</strong>
+            <br>
+            The health of the weapon. The effectiveness of the weapon will severely
+            deteriorate when the
+            durability falls below 30%.
+        </p>
+        <p>
+            <strong>Stability:</strong>
+            <br>
+            The stability of the weapon. The higher this value, the less stamina is
+            consumed when blocking
+            attacks.
+        </p>
+        <p>
+            <strong>Weight:</strong>
+            <br>
+            The weight of the weapon. Note that carrying over 50% of a character's Equip
+            Burden will reduce the
+            speed of their rolls, while going over 100% will reduce their regular speed to walking and attempts to roll
+            or
+            backstep will leave them momentarily stunned.
+        </p>
+        <p>
+
+            <strong>Stats Requirements:</strong>
+            <br>
+            The Stats Requirements determines how high various Stats must be in order to wield the weapon effectively.
+            The
+            Requirement stats for a weapon are W / X / Y / Z:
+            <ul>
+                <li>
+                    W is the Strength required
+                </li>
+                <li>
+                    X is the Dexterity required
+                </li>
+                <li>
+                    Y is the Intelligence required
+                </li>
+                <li>
+                    Z is the Faith required
+                </li>
+            </ul>
+            Wielding a weapon without the required Strength and/or Dexterity will incur a penalty to the Physical
+            damage of
+            the weapon, while lower-than-required Magic and/or Faith will reduce the Magic damage of the weapon.
+            <br>
+            <br>
+            Also keep in mind that a character gains a 50% bonus to Strength by wielding a weapon with both hands, thus
+            reducing the actual Strength required.
+            For example, a character with 18 Strength can wield a Large Club (Requires 26 Strength) properly if the
+            weapon
+            is held with both hands.
+            (18 x 1.5 = 27)
+        </p>
+        <p>
+            <strong>Stat Scaling:</strong>
+            <br>
+            The Stat Scaling rating indicates the level of bonus players receive based on the associated Stat when they
+            use a weapon. This rating can be S, A, B, C, D, or E (in order from most to least bonus for the associated
+            skill).
+        </p>
+    </div>
+
 </main>
 <% include partials/footer.ejs %>
 <% include partials/after-footer.ejs %>

@@ -1,0 +1,65 @@
+<% include partials/head.ejs %>
+<% include partials/header.ejs %>
+<aside>
+	<% include partials/menu.ejs %>
+</aside>
+<main>
+	<section>
+		<form action="/new/spell_tool" method="POST" enctype="multipart/form-data">
+			<label for="name">Item Name</label>
+			<input type="text" id="name" name="name">
+
+			<label for="picture">Picture</label>
+			<input type="file" id="picture" name="picture">
+
+			<img class="itemImg" src="" alt="">
+
+			<label for="magic">Magic Adjust</label>
+			<input type="text" id="magic" name="magic" value="0">
+
+			<label for="damage">Damage</label>
+			<input type="text" id="damage" name="damage" value="0/0/0/0">
+
+			<label for="aux">AUX effect</label>
+			<input type="text" id="aux" name="aux" value="0/0/0/0">
+
+			<label for="reduction">Damage Reduction</label>
+			<input type="text" id="reduction" name="reduction" value="0/0/0/0">
+
+			<label for="critical">Critical</label>
+			<input type="text" id="critical" name="critical" value="0">
+
+			<label for="durability">Durability</label>
+			<input type="text" id="durability" name="durability" value="0">
+
+			<label for="stability">Stability</label>
+			<input type="text" id="stability" name="stability" value="0">
+
+			<label for="weight">Weight</label>
+			<input type="text" id="weight" name="weight" value="0">
+
+			<label for="requirements">Stat requirements</label>
+			<input type="text" id="requirements" name="requirements" value="0/0/0/0">
+
+			<label for="scaling">Stat Scaling</label>
+			<input type="text" id="scaling" name="scaling" value="0/0/0/0">
+
+			<label for="type">Type</label>
+			<select name="type" id="type">
+				<% spell_tool.forEach(type => { %>
+				<option value="<%= type.id %>" <% if (result.spell_tool_type==type.id ){%> selected
+					<%} %>>
+					<%= type.name %>
+				</option>
+				<% }); %>
+			</select>
+
+			<label for="notes">Notes</label>
+			<textarea name="notes" id="notes" cols="30" rows="10"></textarea>
+
+			<button type="submit">Create</button>
+		</form>
+	</section>
+</main>
+<% include partials/footer.ejs %>
+<% include partials/after-footer.ejs %>

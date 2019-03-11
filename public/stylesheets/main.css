@@ -54,6 +54,8 @@ nav ul {
 main form {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    margin: auto;
 }
 
 .mainTop {
@@ -66,7 +68,6 @@ main form {
 
 .mainTop p {
     width: 50%;
-    text-align: justify;
     margin: 20px auto;
 }
 
@@ -109,7 +110,7 @@ main form {
     padding: 10px;
 }
 
-#tableKey{
+#tableKey {
     width: 75%;
     margin: 20px auto 10px;
 }

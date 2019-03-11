@@ -4,10 +4,18 @@
     <% include partials/menu.ejs %>
 </aside>
 <main>
-    <img class="itemImg" src="../images/<%= result.picture %>" alt="">
-    <h2>
-        <%= result.name %>
-    </h2>
+    <div class="mainTop">
+        <h2>
+            <%= result.name %>
+        </h2>
+        <img class="singleItem" src="../images/<%= result.picture %>" alt="">
+        <h3>
+            Effect:
+        </h3>
+        <p>
+            <%= result.effect %>
+        </p>
+    </div>
 </main>
 <% include partials/footer.ejs %>
 <% include partials/after-footer.ejs %>

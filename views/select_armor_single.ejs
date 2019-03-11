@@ -4,10 +4,135 @@
     <% include partials/menu.ejs %>
 </aside>
 <main>
-    <img class="itemImg" src="../images/<%= result.picture %>" alt="">
-    <h2>
-        <%= result.name %>
-    </h2>
+    <div class="mainTop">
+        <h2>
+            <%= result.name %>
+        </h2>
+        <img class="singleItem" src="../images/<%= result.picture %>" alt="">
+        <p <% if (!result.notes || result.notes=='-' ){%>
+            class="hidden"
+            <%} %>>
+            <%= (typeof result.notes != 'undefined') ? result.notes : '' %>
+        </p>
+    </div>
+    <table class="tableSingle">
+        <tr>
+            <th>Physical Defense</th>
+            <th>Elemental Defense</th>
+            <th>Resistance</th>
+            <th>Poise</th>
+            <th>Durability</th>
+            <th>Weight</th>
+            <th>Armor Slot</th>
+        </tr>
+        <tr>
+            <td>
+                <%= result.defense_physical %>
+            </td>
+            <td>
+                <%= result.defense_elemental %>
+            </td>
+            <td>
+                <%= result.resistance %>
+            </td>
+            <td>
+                <%= result.poise %>
+            </td>
+            <td>
+                <%= result.durability %>
+            </td>
+            <td>
+                <%= result.weight %>
+            </td>
+            <td>
+                <%= result.armor_slot %>
+            </td>
+        </tr>
+    </table>
+    <div id="tableKey">
+
+        <h3>
+            Key
+        </h3>
+        <p>
+            <strong>Physical Defense:</strong>
+            <br>
+            The Physical Defense attribute dictates how resilient the Armor is to a certain physical damage type. The
+            physical stats for the Armor are W / X / Y / Z: <ul>
+                <li>
+                    W is the Normal Damage
+                </li>
+                <li>
+                    X is the Striking Damage
+                </li>
+                <li>
+                    Y is the Slashing Damage
+                </li>
+                <li>
+                    Z is the Thrusting Damage
+                </li>
+            </ul>
+        </p>
+        <p>
+            <strong>Elemental Defense:</strong>
+            <br>
+            the Magic attribute dictates how resilient the Armor is to a certain Elemental damage type. The
+            elemental stats for the Armor are W / X / Y: <ul>
+                <li>
+                    W is the Magical Damage
+                </li>
+                <li>
+                    X is the Fire Damage
+                </li>
+                <li>
+                    Y is the Lightning Damage
+                </li>
+            </ul>
+        </p>
+        <p>
+            <strong>Resistance:</strong>
+            <br>
+            The Resistance stat dictates how resistant the armor is againts different harmfull effects. The Resistance
+            stats for a weapon are W / X / Y:
+            <ul>
+                <li>
+                    W is the Bleed Resistance
+                </li>
+                <li>
+                    X is the Poison Resistance
+                </li>
+                <li>
+                    Y is the Curse Resistance
+                </li>
+            </ul>
+        </p>
+        <p>
+            <strong>Poise:</strong>
+            <br>
+            Poise dictates how resilient the Armor is to hitstun. A higher Poise gives a greater chance that the wearer
+            will not be interrupted or staggered when hit. </p>
+        <p>
+            <strong>Durability:</strong>
+            <br>
+            The health of the weapon. The effectiveness of the weapon will severely
+            deteriorate when the
+            durability falls below 30%.
+        </p>
+        <p>
+            <strong>Weight:</strong>
+            <br>
+            The weight of the weapon. Note that carrying over 50% of a character's Equip
+            Burden will reduce the
+            speed of their rolls, while going over 100% will reduce their regular speed to walking and attempts to roll
+            or
+            backstep will leave them momentarily stunned.
+        </p>
+        <p>
+            <strong>Armor Slot:</strong>
+            <br>
+            The Armor Slot is the area where a character can equip the armor piece to.
+        </p>
+    </div>
 </main>
 <% include partials/footer.ejs %>
 <% include partials/after-footer.ejs %>

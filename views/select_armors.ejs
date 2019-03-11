@@ -4,7 +4,6 @@
     <% include partials/menu.ejs %>
 </aside>
 <main>
-    
         <table>
             <% results.forEach(result => { %>
             <tr>
@@ -12,7 +11,7 @@
                     <img class="itemImg" src="../images/<%= result.picture %>" alt="">
                 </td>
                 <td>
-                    <a href="/armors/<%= result.id %>" class="itemLink">
+                    <a href="/armor/<%= result.id %>" class="itemLink">
                         <%= result.name %></a>
                 </td>
             </tr>

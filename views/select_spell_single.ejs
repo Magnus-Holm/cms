@@ -4,10 +4,83 @@
     <% include partials/menu.ejs %>
 </aside>
 <main>
-    <img class="itemImg" src="../images/<%= result.picture %>" alt="">
-    <h2>
-        <%= result.name %>
-    </h2>
+    <div class="mainTop">
+        <h2>
+            <%= result.name %>
+        </h2>
+        <img class="singleItem" src="../images/<%= result.picture %>" alt="">
+        <p <% if (!result.notes || result.notes=='-' ){%>
+            class="hidden"
+            <%} %>>
+            <%= (typeof result.notes != 'undefined') ? result.notes : '' %>
+        </p>
+    </div>
+    <table class="tableSingle">
+        <tr>
+            <th>Effect</th>
+            <th>Uses</th>
+            <th>Attunement Slots</th>
+            <th>Spell Type</th>
+            <th>Faith Requirement</th>
+            <th>Intelligence Requirement</th>
+        </tr>
+        <tr>
+            <td>
+                <%= result.effect %>
+            </td>
+            <td>
+                <%= result.uses %>
+            </td>
+            <td>
+                <%= result.slots %>
+            </td>
+            <td>
+                <%= result.spell_type %>
+            </td>
+            <td>
+                <%= result.faith_need %>
+            </td>
+            <td>
+                <%= result.int_need %>
+            </td>
+        </tr>
+    </table>
+    <div id="tableKey">
+        <h3>
+            Key
+        </h3>
+        <p>
+            <strong>Effect:</strong>
+            <br>
+            The Effect is what the spell does when it is cast.
+        </p>
+        <p>
+            <strong>Uses:</strong>
+            <br>
+            The Uses is how many times a spell can be cast, before it has to be replenished at a bonfire.
+        </p>
+        <p>
+            <strong>Attunement Slots:</strong>
+            <br>
+            The Attunement Slots is the amount of attunement slots, that a character needs to have free to be able to
+            equip the spell.
+        </p>
+        <p>
+            <strong>Spell Type:</strong>
+            <br>
+            The Spell Type is the category that the spell is in.
+        </p>
+        <p>
+            <strong>Faith Requirement:</strong>
+            <br>
+            The Faith Requirement is the amount of faith a character needs to be able to cast the spell.
+        </p>
+        <p>
+            <strong>Intelligence Requirement:</strong>
+            <br>
+            The Faith Requirement is the amount of faith a character needs to be able to cast the spell.
+        </p>
+    </div>
 </main>
 <% include partials/footer.ejs %>
 <% include partials/after-footer.ejs %>

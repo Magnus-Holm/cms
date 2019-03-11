@@ -1,0 +1,53 @@
+<% include partials/head.ejs %>
+<% include partials/header.ejs %>
+<aside>
+	<% include partials/menu.ejs %>
+</aside>
+<main>
+	<section>
+		<form action="/new/spell" method="POST" enctype="multipart/form-data">
+			<label for="name">Item Name</label>
+			<input type="text" id="name" name="name">
+
+			<label for="picture">Picture</label>
+			<input type="file" id="picture" name="picture">
+
+			<img class="itemImg" src="" alt="">
+
+			<label for="effect">Spell Effect</label>
+			<input type="text" id="effect" name="effect">
+
+
+			<label for="uses">Uses</label>
+			<input type="text" id="uses" name="uses" value="0">
+
+
+			<label for="slots">Attunement slots</label>
+			<input type="text" id="slots" name="slots" value="0">
+
+
+			<label for="faith">Faith Requirement</label>
+			<input type="text" id="faith" name="faith" value="0">
+
+			<label for="intelligence">Intelligence Requirement</label>
+			<input type="text" id="intelligence" name="intelligence" value="0">
+
+			<label for="type">Type</label>
+			<select name="type" id="type">
+				<% spell_types.forEach(type => { %>
+				<option value="<%= type.id %>" <% if (result.spell_type==type.id ){%> selected
+					<%} %>>
+					<%= type.name %>
+				</option>
+				<% }); %>
+			</select>
+
+			<label for="notes">Notes</label>
+			<textarea name="notes" id="notes" cols="30" rows="10"></textarea>
+
+			<button type="submit">Create</button>
+		</form>
+	</section>
+</main>
+<% include partials/footer.ejs %>
+<% include partials/after-footer.ejs %>

@@ -1,0 +1,25 @@
+<% include partials/head.ejs %>
+<% include partials/header.ejs %>
+<aside>
+	<% include partials/menu.ejs %>
+</aside>
+<main>
+	<section>
+		<form action="/new/ring" method="POST" enctype="multipart/form-data">
+			<label for="name">Item Name</label>
+			<input type="text" id="name" name="name">
+
+			<label for="picture">Picture</label>
+			<input type="file" id="picture" name="picture">
+
+			<img class="itemImg" src="" alt="">
+
+			<label for="effect">Ring's effect</label>
+			<input type="text" id="effect" name="effect">
+
+			<button type="submit">Create</button>
+		</form>
+	</section>
+</main>
+<% include partials/footer.ejs %>
+<% include partials/after-footer.ejs %>

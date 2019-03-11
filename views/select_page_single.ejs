@@ -4,9 +4,14 @@
     <% include partials/menu.ejs %>
 </aside>
 <main>
-    <h2>
-        <%= result.title %>
-    </h2>
+    <div class="mainTop">
+        <h2>
+            <%= result.title %>
+        </h2>
+        <p>
+            <%= result.content %>
+        </p>
+    </div>
 </main>
 <% include partials/footer.ejs %>
 <% include partials/after-footer.ejs %>
