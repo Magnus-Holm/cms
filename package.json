@@ -22,7 +22,8 @@
   "scripts": {
     "start": "node -r dotenv/config server.js dotenv_config_path=./.env",
     "dev": "set DEBUG=Kodebase & nodemon -r dotenv/config server.js dotenv_config_path=./.env",
-    "test": "echo \"Error: no test specified\""
+    "test": "echo \"Error: no test specified\"",
+    "debug": "node --inspect=5858 -r dotenv/config server.js dotenv_config_path=./.env server.js"
   },
   "author": "VenusWeb",
   "license": "MIT",

@@ -1,0 +1,22 @@
+<% include admin-partials/admin_head.ejs %>
+<% include admin-partials/headerAdmin.ejs %>
+<main role="main">
+	<% include admin-partials/navAdmin.ejs %>
+	<section>
+		<form action="/admin/menu/new" method="POST">
+			<label for="name">Menu Name</label>
+			<input type="text" id="name" name="name">
+
+			<label for="web_link">Web Link</label>
+			<input type="text" id="web_link" name="web_link">
+
+			<label for="position">Position</label>
+			<input type="number" id="position" name="position">
+
+			<button type="submit">Create</button>
+		</form>
+	</section>
+</main>
+</body>
+
+</html>

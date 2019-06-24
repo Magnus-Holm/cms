@@ -9,10 +9,16 @@ module.exports = function (app) {
             res.redirect('/login');
             return;
         }
-        res.render('create_new', {
-            'title': 'Create somethin new',
-            session: req.session.user
-        });
+        mysql.query(`SELECT * FROM cms.menu ORDER BY position`,
+            function (err, menuLinks) {
+                if (err) return next(`${err} at db.query (${__filename}:7)`);
+
+                res.render('create_new', {
+                    title: 'Create somethin new',
+                    menuLinks: menuLinks,
+                    session: req.session.user
+                });
+            });
     });
 
     app.get('/new/weapon', (req, res, next) => {
@@ -20,18 +26,24 @@ module.exports = function (app) {
             res.redirect('/login');
             return;
         }
-        mysql.query(`SELECT * FROM weapons`,
-            function (err, result) {
-                if (err) return next(`${err} at mysql.query (${__filename}:8)`);
-                mysql.query(`SELECT id, name FROM weapon_type`,
-                    function (err, weapon_type) {
-                        if (err) return next(`${err} at mysql.query (${__filename}:11)`);
-                        res.render('new_weapon', {
-                            'title': 'New Weapon',
-                            result: result[0],
-                            weapon_type: weapon_type,
-                            session: req.session.user
-                        });
+        mysql.query(`SELECT * FROM cms.menu ORDER BY position`,
+            function (err, menuLinks) {
+                if (err) return next(`${err} at db.query (${__filename}:7)`);
+
+                mysql.query(`SELECT * FROM weapons`,
+                    function (err, result) {
+                        if (err) return next(`${err} at mysql.query (${__filename}:8)`);
+                        mysql.query(`SELECT id, name FROM weapon_type`,
+                            function (err, weapon_type) {
+                                if (err) return next(`${err} at mysql.query (${__filename}:11)`);
+                                res.render('new_weapon', {
+                                    title: 'New Weapon',
+                                    result: result[0],
+                                    weapon_type: weapon_type,
+                                    menuLinks: menuLinks,
+                                    session: req.session.user
+                                });
+                            });
                     });
             });
     });
@@ -70,18 +82,24 @@ module.exports = function (app) {
             res.redirect('/login');
             return;
         }
-        mysql.query(`SELECT * FROM weapons`,
-            function (err, result) {
-                if (err) return next(`${err} at mysql.query (${__filename}:46)`);
-                mysql.query(`SELECT id, name FROM shield_size`,
-                    function (err, shield_size) {
-                        if (err) return next(`${err} at mysql.query (${__filename}:49)`);
-                        res.render('new_shield', {
-                            'title': 'New Shield',
-                            result: result[0],
-                            shield_size: shield_size,
-                            session: req.session.user
-                        });
+        mysql.query(`SELECT * FROM cms.menu ORDER BY position`,
+            function (err, menuLinks) {
+                if (err) return next(`${err} at db.query (${__filename}:7)`);
+
+                mysql.query(`SELECT * FROM weapons`,
+                    function (err, result) {
+                        if (err) return next(`${err} at mysql.query (${__filename}:46)`);
+                        mysql.query(`SELECT id, name FROM shield_size`,
+                            function (err, shield_size) {
+                                if (err) return next(`${err} at mysql.query (${__filename}:49)`);
+                                res.render('new_shield', {
+                                    title: 'New Shield',
+                                    result: result[0],
+                                    shield_size: shield_size,
+                                    menuLinks: menuLinks,
+                                    session: req.session.user
+                                });
+                            });
                     });
             });
     });
@@ -121,18 +139,24 @@ module.exports = function (app) {
             res.redirect('/login');
             return;
         }
-        mysql.query(`SELECT * FROM weapons`,
-            function (err, result) {
-                if (err) return next(`${err} at mysql.query (${__filename}:84)`);
-                mysql.query(`SELECT id, name FROM spell_tool`,
-                    function (err, spell_tool) {
-                        if (err) return next(`${err} at mysql.query (${__filename}:89)`);
-                        res.render('new_spell_tool', {
-                            'title': 'New Weapon',
-                            result: result[0],
-                            spell_tool: spell_tool,
-                            session: req.session.user
-                        });
+        mysql.query(`SELECT * FROM cms.menu ORDER BY position`,
+            function (err, menuLinks) {
+                if (err) return next(`${err} at db.query (${__filename}:7)`);
+
+                mysql.query(`SELECT * FROM weapons`,
+                    function (err, result) {
+                        if (err) return next(`${err} at mysql.query (${__filename}:84)`);
+                        mysql.query(`SELECT id, name FROM spell_tool`,
+                            function (err, spell_tool) {
+                                if (err) return next(`${err} at mysql.query (${__filename}:89)`);
+                                res.render('new_spell_tool', {
+                                    title: 'New Weapon',
+                                    result: result[0],
+                                    spell_tool: spell_tool,
+                                    menuLinks: menuLinks,
+                                    session: req.session.user
+                                });
+                            });
                     });
             });
     });
@@ -169,18 +193,24 @@ module.exports = function (app) {
             res.redirect('/login');
             return;
         }
-        mysql.query(`SELECT * FROM armor`,
-            function (err, result) {
-                if (err) return next(`${err} at mysql.query (${__filename}:120)`);
-                mysql.query(`SELECT id, slot_name FROM armor_slots`,
-                    function (err, armor_slots) {
-                        if (err) return next(`${err} at mysql.query (${__filename}:123)`);
-                        res.render('new_armor', {
-                            'title': 'New Armor',
-                            result: result[0],
-                            armor_slots: armor_slots,
-                            session: req.session.user
-                        });
+        mysql.query(`SELECT * FROM cms.menu ORDER BY position`,
+            function (err, menuLinks) {
+                if (err) return next(`${err} at db.query (${__filename}:7)`);
+
+                mysql.query(`SELECT * FROM armor`,
+                    function (err, result) {
+                        if (err) return next(`${err} at mysql.query (${__filename}:120)`);
+                        mysql.query(`SELECT id, slot_name FROM armor_slots`,
+                            function (err, armor_slots) {
+                                if (err) return next(`${err} at mysql.query (${__filename}:123)`);
+                                res.render('new_armor', {
+                                    title: 'New Armor',
+                                    result: result[0],
+                                    armor_slots: armor_slots,
+                                    menuLinks: menuLinks,
+                                    session: req.session.user
+                                });
+                            });
                     });
             });
     });
@@ -214,10 +244,16 @@ module.exports = function (app) {
             res.redirect('/login');
             return;
         }
-        res.render('new_ring', {
-            'title': 'New Ring',
-            session: req.session.user
-        });
+        mysql.query(`SELECT * FROM cms.menu ORDER BY position`,
+            function (err, menuLinks) {
+                if (err) return next(`${err} at db.query (${__filename}:7)`);
+
+                res.render('new_ring', {
+                    title: 'New Ring',
+                    menuLinks: menuLinks,
+                    session: req.session.user
+                });
+            });
     });
 
     app.post('/new/ring', (req, res, next) => {
@@ -243,18 +279,24 @@ module.exports = function (app) {
             res.redirect('/login');
             return;
         }
-        mysql.query(`SELECT * FROM spells`,
-            function (err, result) {
-                if (err) return next(`${err} at mysql.query (${__filename}:169)`);
-                mysql.query(`SELECT id, name FROM spell_types`,
-                    function (err, spell_types) {
-                        if (err) return next(`${err} at mysql.query (${__filename}:172)`);
-                        res.render('new_spell', {
-                            'title': 'New Spell',
-                            result: result[0],
-                            spell_types: spell_types,
-                            session: req.session.user
-                        });
+        mysql.query(`SELECT * FROM cms.menu ORDER BY position`,
+            function (err, menuLinks) {
+                if (err) return next(`${err} at db.query (${__filename}:7)`);
+
+                mysql.query(`SELECT * FROM spells`,
+                    function (err, result) {
+                        if (err) return next(`${err} at mysql.query (${__filename}:169)`);
+                        mysql.query(`SELECT id, name FROM spell_types`,
+                            function (err, spell_types) {
+                                if (err) return next(`${err} at mysql.query (${__filename}:172)`);
+                                res.render('new_spell', {
+                                    title: 'New Spell',
+                                    result: result[0],
+                                    spell_types: spell_types,
+                                    menuLinks: menuLinks,
+                                    session: req.session.user
+                                });
+                            });
                     });
             });
     });
@@ -279,27 +321,6 @@ module.exports = function (app) {
                         res.redirect('/spells');
                     });
                 });
-            });
-    });
-
-    // Create new page
-    app.get('/new/blog', (req, res, next) => {
-        if (!req.session.user) {
-            res.redirect('/login');
-            return;
-        }
-        res.render('new_page', {
-            'title': 'New Page',
-            session: req.session.user
-        });
-    });
-
-    app.post('/new/blog', (req, res, next) => {
-        mysql.query(`INSERT INTO pages 
-                    SET pages.title = ?, pages.content = ?`,
-            [req.fields.title, req.fields.content], (err, results) => {
-                if (err) return next(`${err} at mysql.query (${__filename}:159)`);
-                res.redirect('/blog');
             });
     });
 };

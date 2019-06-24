@@ -6,10 +6,16 @@ module.exports = function (app) {
         if (req.query.status && req.query.status === 'badcredentials') {
             res.locals.status = 'ugyldigt brugernavn eller adgangskode';
         }
-        res.render('login', {
-            title: 'Log ind',
-            'session': req.session.user
-        });
+        mysql.query(`SELECT * FROM cms.menu ORDER BY position`,
+            function (err, menuLinks) {
+                if (err) return next(`${err} at db.query (${__filename}:7)`);
+
+                res.render('login', {
+                    title: 'Log ind',
+                    menuLinks: menuLinks,
+                    session: req.session.user
+                });
+            });
     });
 
     app.post('/login', (req, res, next) => {

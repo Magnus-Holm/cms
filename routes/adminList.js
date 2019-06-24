@@ -69,7 +69,7 @@ module.exports = function (app) {
                     INNER JOIN armor_slots ON armor.armor_slot = armor_slots.id
                     ORDER BY armor.id`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:66)`);
+                if (err) return next(`${err} at db.query (${__filename}:67)`);
                 res.render('admin/admin_select_armor', {
                     'title': 'admin',
                     'db': 'Armor',
@@ -82,23 +82,10 @@ module.exports = function (app) {
     app.get('/admin/rings', (req, res, next) => {
         mysql.query(`SELECT * FROM rings`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:82)`);
+                if (err) return next(`${err} at db.query (${__filename}:83)`);
                 res.render('admin/admin_select_rings', {
                     'title': 'admin',
                     'db': 'Rings',
-                    'results': results
-                });
-            });
-    });
-
-    // List Pages
-    app.get('/admin/pages', (req, res, next) => {
-        mysql.query(`SELECT * FROM pages`,
-            function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:82)`);
-                res.render('admin/admin_select_pages', {
-                    'title': 'admin',
-                    'db': 'Pages',
                     'results': results
                 });
             });
@@ -111,7 +98,7 @@ module.exports = function (app) {
                     FROM cms.spells
                     INNER JOIN spell_types ON spells.spell_type = spell_types.id`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:95)`);
+                if (err) return next(`${err} at db.query (${__filename}:96)`);
                 res.render('admin/admin_select_spells', {
                     'title': 'admin',
                     'db': 'Spells',
@@ -125,10 +112,23 @@ module.exports = function (app) {
         mysql.query(`SELECT users.id, users.username, users.password, users.picture, rank.name AS rank FROM users
         INNER JOIN cms.rank ON users.rank_id = rank.id`,
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:111)`);
+                if (err) return next(`${err} at db.query (${__filename}:112)`);
                 res.render('admin/admin_select_users', {
                     'title': 'admin',
                     'db': 'Users',
+                    'results': results
+                });
+            });
+    });
+
+    // List Menus
+    app.get('/admin/menus', (req, res, next) => {
+        mysql.query(`SELECT * FROM cms.menu ORDER BY position`,
+            function (err, results) {
+                if (err) return next(`${err} at db.query (${__filename}:126)`);
+                res.render('admin/admin_select_menu', {
+                    'title': 'admin',
+                    'db': 'Menus',
                     'results': results
                 });
             });

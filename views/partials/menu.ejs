@@ -1,34 +1,18 @@
 <nav role="navigation">
     <ul role="menubar">
+        <% menuLinks.forEach(menu => { %>
         <li role="menuitem">
-            <a href="/">Frontpage</a>
+            <a href="<%= menu.link%>">
+                <%= menu.name%>
+            </a>
         </li>
+        <% }); %>
+        <% if(!session){%>
         <li role="menuitem">
-            <a href="/blog">Blog</a>
+            <a href="/sign_up">
+                Sign up
+            </a>
         </li>
-        <li role="menuitem">
-            <a href="/profile">Profile</a>
-        </li>
-        <li role="menuitem">
-            <a href="/weapons">Weapons</a>
-        </li>
-        <li role="menuitem">
-            <a href="/shields">Shields</a>
-        </li>
-        <li role="menuitem">
-            <a href="/spell_tools">Spell Tools</a>
-        </li>
-        <li role="menuitem">
-            <a href="/armor">Armor</a>
-        </li>
-        <li role="menuitem">
-            <a href="/rings">Rings</a>
-        </li>
-        <li role="menuitem">
-            <a href="/spells">Spells</a>
-        </li>
-        <li role="menuitem">
-            <a href="/new">Create new item</a>
-        </li>
+        <%} %>
     </ul>
 </nav>

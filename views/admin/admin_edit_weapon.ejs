@@ -107,7 +107,7 @@
 		event.preventDefault();
 		let formData = new FormData();
 		formData.append('name', form.name.value)
-		formData.append('picture', form.picture)
+		formData.append('picture', form.picture.files[0])
 		formData.append('damage', form.damage.value)
 		formData.append('aux', form.aux.value)
 		formData.append('reduction', form.reduction.value)
@@ -120,6 +120,7 @@
 		formData.append('scaling', form.scaling.value)
 		formData.append('type', form.type.value)
 		formData.append('notes', form.notes.value)
+		
 		fetch(`/admin/weapon/edit/${this.id.value}`, {
 				method: 'PATCH',
 				body: formData

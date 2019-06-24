@@ -59,7 +59,7 @@
 		event.preventDefault();
 		let formData = new FormData();
 		formData.append('name', form.name.value)
-		formData.append('picture', form.picture)
+		formData.append('picture', form.picture.files[0])
 		formData.append('physical', form.physical.value)
 		formData.append('elemental', form.elemental.value)
 		formData.append('resistance', form.resistance.value)

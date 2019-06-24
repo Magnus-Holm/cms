@@ -21,7 +21,7 @@ module.exports = function (app) {
         mysql.query(`DELETE FROM weapons
             WHERE weapons.id = ?`,
             [req.params.id],
-            function (err, results) {
+            function (err) {
                 if (err) return next(`${err} at db.query (${__filename}:21)`);
                 res.status(200);
                 res.end();
@@ -47,7 +47,7 @@ module.exports = function (app) {
         mysql.query(`DELETE FROM weapons
             WHERE weapons.id = ?`,
             [req.params.id],
-            function (err, results) {
+            function (err) {
                 if (err) return next(`${err} at db.query (${__filename}:47)`);
                 res.status(200);
                 res.end();
@@ -73,7 +73,7 @@ module.exports = function (app) {
         mysql.query(`DELETE FROM weapons
             WHERE weapons.id = ?`,
             [req.params.id],
-            function (err, results) {
+            function (err) {
                 if (err) return next(`${err} at db.query (${__filename}:73)`);
                 res.status(200);
                 res.end();
@@ -101,8 +101,8 @@ module.exports = function (app) {
         mysql.query(`DELETE FROM armor
             WHERE armor.id = ?`,
             [req.params.id],
-            function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:99)`);
+            function (err) {
+                if (err) return next(`${err} at db.query (${__filename}:101)`);
                 res.status(200);
                 res.end();
             });
@@ -114,7 +114,7 @@ module.exports = function (app) {
                     WHERE rings.id = ?`,
             [req.params.id],
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:111)`);
+                if (err) return next(`${err} at db.query (${__filename}:113)`);
                 res.render('admin/admin_delete_ring', {
                     'title': 'admin',
                     'db': results[0].name,
@@ -127,8 +127,8 @@ module.exports = function (app) {
         mysql.query(`DELETE FROM rings
             WHERE rings.id = ?`,
             [req.params.id],
-            function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:125)`);
+            function (err) {
+                if (err) return next(`${err} at db.query (${__filename}:127)`);
                 res.status(200);
                 res.end();
             });
@@ -140,7 +140,7 @@ module.exports = function (app) {
                     WHERE spells.id = ?`,
             [req.params.id],
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:137)`);
+                if (err) return next(`${err} at db.query (${__filename}:139)`);
                 res.render('admin/admin_delete_spell', {
                     'title': 'admin',
                     'db': results[0].name,
@@ -153,8 +153,8 @@ module.exports = function (app) {
         mysql.query(`DELETE FROM spells
             WHERE spells.id = ?`,
             [req.params.id],
-            function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:151)`);
+            function (err) {
+                if (err) return next(`${err} at db.query (${__filename}:153)`);
                 res.status(200);
                 res.end();
             });
@@ -168,7 +168,7 @@ module.exports = function (app) {
                     WHERE users.id = ?`,
             [req.params.id],
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:163)`);
+                if (err) return next(`${err} at db.query (${__filename}:165)`);
                 res.render('admin/admin_delete_user', {
                     'title': 'admin',
                     'db': results[0].username,
@@ -181,8 +181,32 @@ module.exports = function (app) {
         mysql.query(`DELETE FROM users
             WHERE users.id = ?`,
             [req.params.id],
+            function (err) {
+                if (err) return next(`${err} at db.query (${__filename}:181)`);
+                res.status(200);
+                res.end();
+            });
+    });
+
+    // Deleting menu
+    app.get('/admin/menu/delete/:id', (req, res, next) => {
+        mysql.query(`SELECT * FROM cms.menu WHERE id = ?`,
+            [req.params.id],
             function (err, results) {
-                if (err) return next(`${err} at db.query (${__filename}:179)`);
+                if (err) return next(`${err} at db.query (${__filename}:193)`);
+                res.render('admin/admin_delete_menu', {
+                    'title': 'admin',
+                    'db': results[0].name,
+                    'results': results[0],
+                });
+            });
+    });
+
+    app.delete('/admin/menu/delete/:id', (req, res, next) => {
+        mysql.query(`DELETE FROM cms.menu WHERE id = ?`,
+            [req.params.id],
+            function (err) {
+                if (err) return next(`${err} at db.query (${__filename}:206)`);
                 res.status(200);
                 res.end();
             });
