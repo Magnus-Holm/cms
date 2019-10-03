@@ -10,7 +10,7 @@ module.exports = function (app) {
             [req.params.id],
             function (err, results) {
                 if (err) return next(`${err} at db.query (${__filename}:9)`);
-                mysql.query(`SELECT id, name FROM weapon_type`, [req.params.id],
+                mysql.query(`SELECT id, name FROM weapon_type`,
                     function (err, weapon_type) {
                         if (err) return next(`${err} at db.query (${__filename}:13)`);
                         res.render('admin/admin_edit_weapon', {

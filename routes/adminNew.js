@@ -45,7 +45,7 @@ module.exports = function (app) {
                 if (err) return next(`${err} at db.query (${__filename}:31)`);
                 fs.readFile(req.files.picture.path, (err, data) => {
                     if (err) return next(`${err} at fs.readFile (${__filename}:46)`);
-                    fs.writeFile(`./public/images/${picturePath}`, data, err => {
+                    fs.writeFile(`./public/images/${picturePath}`, (err, data) => {
                         if (err) return next(`${err} at fs.writeFile (${__filename}:48)`);
                         res.redirect('/admin/weapons');
                     });
